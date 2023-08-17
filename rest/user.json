@@ -1,0 +1,32 @@
+{
+    "user1": {
+        "name": "Peter",
+        "password": "password1",
+        "profession": "Teacher",
+        "id": 1
+    },
+    "user2": {
+        "name": "Lisa",
+        "password": "password123",
+        "profession": "Director",
+        "id": 2
+    },
+    "user3": {
+        "name": "Paul",
+        "password": "987",
+        "profession": "Student",
+        "id": 3
+    },
+    "user4": {
+        "id": "4",
+        "name": "Annie",
+        "password": "123456",
+        "profession": "Student"
+    },
+    "user5": {
+        "id": "5",
+        "name": "Annie",
+        "password": "123456",
+        "profession": "Student"
+    }
+}
