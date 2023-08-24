@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const request = require('request')
+const fs = require('fs')
 const { PORT } = require('./config.js')
 const { API_KEY } = require('./config.js')
 
@@ -20,10 +21,23 @@ app.get('/ticker=:id', function(req, res){
           console.log('Status:', res.statusCode)
         } else {
           // data is successfully parsed as a JSON object:
-          console.log(data)
+          var newData = JSON.stringify(data)
+          fs.writeFile(__dirname+'/'+ticker+'.json', newData, err => {
+            if(err) throw err;
+            console.log('Success!')
+          })
+          //console.log(data)
         }
     })
-    res.send('success')
+   res.send('success !')
+})
+
+app.get('/ticker-result=:id', function(req, res){
+  var ticker = req.params.id
+  fs.readFile(__dirname +'/'+ticker+'.json', "utf8", function(err, data){
+    if(err) throw err
+    res.send(JSON.parse(data))
+  })
 })
 
 app.listen(PORT, () => {
