@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "Article 1",
+        "descr" : " Article 1  - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste impedit vitae iure deserunt itaque quod veniam illo accusamus iusto sit quidem, in nostrum aliquam vero nemo voluptatibus neque doloremque cumque.",
+        "Author": "Peter"
+    },
+    {
+        "id": 2,
+        "title": "Article 2",
+        "descr" : " Article 2  - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste impedit vitae iure deserunt itaque quod veniam illo accusamus iusto sit quidem, in nostrum aliquam vero nemo voluptatibus neque doloremque cumque.",
+        "Author": "Lisa"
+    },
+    {
+        "id": 3,
+        "title": "Article 3",
+        "descr" : " Article 3  - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste impedit vitae iure deserunt itaque quod veniam illo accusamus iusto sit quidem, in nostrum aliquam vero nemo voluptatibus neque doloremque cumque.",
+        "Author": "Annie"
+    },
+    {
+        "id": 4,
+        "title": "Article 4",
+        "descr" : " Article 4  - Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste impedit vitae iure deserunt itaque quod veniam illo accusamus iusto sit quidem, in nostrum aliquam vero nemo voluptatibus neque doloremque cumque.",
+        "Author": "Paul"
+    }
+]
