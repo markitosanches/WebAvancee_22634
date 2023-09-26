@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            display: block;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <login-form/>
+    </div>
+</body>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        let app = Vue.createApp({
+
+        })
+        app.component('login-form', {
+            template:`
+            <h1>{{ title }}</h1>
+            <form @submit.prevent="handleSubmit">
+                <custom-input
+                v-for="(input, i) in inputs"
+                :key="i"
+                :label=input.label
+                :type=input.type
+                :placeholder=input.placeholder
+                v-model="input.value"
+                :maxlength="input.maxlength"
+                />
+
+                <button>Login</button>
+            </form>
+            `,
+            data(){
+                return{
+                    title: 'Login Page',
+                    inputs: [
+                        {
+                            label: 'Username',
+                            type: 'email',
+                            placeholder: 'Type username',
+                            value: '',
+                            maxlength: 25
+                        },
+                        {
+                            label: 'Password',
+                            type: 'password',
+                            placeholder: 'Type Password',
+                            value: '',
+                            maxlength: 6
+                        },
+                        {
+                            label: 'Name',
+                            type: 'text',
+                            placeholder: 'Type your name',
+                            value: '',
+                            maxlength:10
+                        }
+                    ]
+                }
+            },
+            methods: {
+                handleSubmit(){
+                    console.log(this.inputs[0].value, this.inputs[1].value)
+                }
+            }
+        })
+        app.component('custom-input', {
+            template: `
+            <label>{{ label }}
+                    <input :type="type" v-model="inputValue" :placeholder="placeholder" :maxlength="maxlength">
+            </label>
+            `,
+            props: ['label', 'type', 'placeholder', 'modelValue', 'maxlength'],
+            computed: {
+                inputValue:{
+                    set(value){
+                        this.$emit('update:modelValue', value)
+                    },
+                    get(){
+                        return this.modelValue
+                    }
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+
+</html>
+
