@@ -16,19 +16,7 @@
       "id": 3,
       "text": "Food shopping",
       "day": "Feb 5th at 2:30pm",
-      "reminder": false
-    },
-    {
-      "text": "Test",
-      "day": "Sept 19, 2023",
-      "reminder": true,
-      "id": 4
-    },
-    {
-      "text": "abc",
-      "day": "fsfs",
-      "reminder": true,
-      "id": 5
+      "reminder": true
     }
   ]
 }

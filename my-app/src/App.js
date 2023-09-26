@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import ManyTasks from './components/ManyTasks'
 import AddTask from './components/AddTask'
+import About from './components/About'
+import Footer from './components/Footer'
 function App() {
 
 //GLOBAL
@@ -74,12 +77,18 @@ const addTask = async (task) => {
 const [showAddTask, setShowAddTask] = useState(false)
 
   return (
-   <div className='container'>
-      <Header onAddBtn={() => setShowAddTask(!showAddTask)} showAdd={showAddTask}/>
-      {/* <AddTask onAdd={addTask}/> */}
-      {showAddTask && <AddTask onAdd={addTask}/>}
-      <ManyTasks tasks={tasks} onDeleteMany={deleteTask}  onToggleMany={toggleReminder} />
-   </div>
+    <BrowserRouter>
+        <div className='container'>
+            <Header onAddBtn={() => setShowAddTask(!showAddTask)} showAdd={showAddTask}/>
+            {/* <AddTask onAdd={addTask}/> */}
+            {showAddTask && <AddTask onAdd={addTask}/>}
+            <Routes>
+                <Route path='/' element={<ManyTasks tasks={tasks} onDeleteMany={deleteTask}  onToggleMany={toggleReminder} />}/>
+                <Route path='/about' element={<About/>}/>
+            </Routes>
+            <Footer/>
+        </div>
+    </BrowserRouter>
   );
 }
 
