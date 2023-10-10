@@ -15,7 +15,7 @@
                     <button class="btn btn-outline-dark" type="button" @click="toggleSidebar">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">{{ totalQuantity }}</span>
                     </button>
                 </form>
             </div>
@@ -32,16 +32,21 @@
     </header>
   <router-view
   :inventory = "inventory"
+  :addTo = "addToCart"
   />
   <Sidebar
   v-if="showSideBar"
   :toggle = "toggleSidebar"
+  :cart = "cart"
+  :inventory = "inventory"
+  :remove = "removeItem"
   />
   </div>
 </template>
 
 <script>
 import Sidebar from '@/components/SideBar.vue'
+import product from '@/product.json'
 export default {
   components: {
     Sidebar
@@ -49,41 +54,28 @@ export default {
   data () {
     return {
       showSideBar: false,
-      inventory: [
-        {
-          id: 1,
-          name: 'Head Set',
-          photo: 'phone.jpg',
-          price: {
-            USD: 15.00,
-            CAD: 18.50
-          },
-          type: 'Electronic'
-        }, {
-          id: 2,
-          name: 'Nintendo',
-          photo: 'game.jpg',
-          price: {
-            USD: 15.00,
-            CAD: 18.50
-          },
-          type: 'Electronic'
-        }, {
-          id: 3,
-          name: 'Nintendo',
-          photo: 'game.jpg',
-          price: {
-            USD: 15.00,
-            CAD: 18.50
-          },
-          type: 'Electronic'
-        }
-      ]
+      inventory: product,
+      cart: {}
     }
   },
   methods: {
     toggleSidebar () {
       this.showSideBar = !this.showSideBar
+    },
+    addToCart (product, index) {
+      if (!this.cart[product]) this.cart[product] = 0
+      this.cart[product] += this.inventory[index].quantity
+      // console.log(this.cart[product])
+    },
+    removeItem (name) {
+      delete this.cart[name]
+    }
+  },
+  computed: {
+    totalQuantity () {
+      return Object.values(this.cart).reduce((acc, curr) => {
+        return acc + curr
+      }, 0)
     }
   }
 }

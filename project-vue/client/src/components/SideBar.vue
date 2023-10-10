@@ -21,35 +21,23 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><img src="img/100/phone.jpg" alt="..." /></td>
-                  <td>Phone</td>
-                  <td>$1.00</td>
-                  <td class="center">1</td>
-                  <td>$1.00</td>
+                <tr v-for="(quantity, key, i) in cart" :key="i" >
+                  <td><img :src="require(`@/assets/img/100/${getPhoto(key)}`)" :alt="key" /></td>
+                  <td>{{ key }}</td>
+                  <td>$ {{getPrice(key)}}</td>
+                  <td class="center">{{ quantity }}</td>
+                  <td>${{(getPrice(key) * quantity).toFixed(2)}}</td>
                   <td class="center">
-                    <button class="btn btn-light cart-remove">
+                    <button class="btn btn-light cart-remove" @click="remove(key)">
                       &times;
                     </button>
                   </td>
                 </tr>
-                <tr>
-                    <td><img src="img/100/game.jpg" alt="..." /></td>
-                    <td>Game</td>
-                    <td>$1.00</td>
-                    <td class="center">1</td>
-                    <td>$1.00</td>
-                    <td class="center">
-                      <button class="btn btn-light cart-remove">
-                        &times;
-                      </button>
-                    </td>
-                  </tr>
               </tbody>
             </table>
-            <p class="center"><em>No items in cart</em></p>
+            <p v-if="!Object.keys(cart).length" class="center"><em>No items in cart</em></p>
             <div class="spread">
-              <span><strong>Total:</strong> $1.00</span>
+              <span><strong>Total:</strong> $ {{ calculateTotal() }}</span>
               <button class="btn btn-light">Checkout</button>
             </div>
           </div>
@@ -59,6 +47,24 @@
 
 <script>
 export default {
-  props: ['toggle']
+  props: ['toggle', 'cart', 'inventory', 'remove'],
+  methods: {
+    getPrice (name) {
+      const product = this.inventory.find((p) => {
+        return p.name === name
+      })
+      return product.price.CAD.toFixed(2)
+    },
+    getPhoto (name) {
+      const product = this.inventory.find((p) => {
+        return p.name === name
+      })
+      return product.photo
+    },
+    calculateTotal () {
+      const total = Object.entries(this.cart).reduce((acc, curr) => { return acc + (curr[1] * this.getPrice(curr[0])) }, 0)
+      return total.toFixed(2)
+    }
+  }
 }
 </script>
