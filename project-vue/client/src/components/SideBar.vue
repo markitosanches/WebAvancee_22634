@@ -53,7 +53,7 @@ export default {
       const product = this.inventory.find((p) => {
         return p.name === name
       })
-      return product.price.CAD.toFixed(2)
+      return product.price.toFixed(2)
     },
     getPhoto (name) {
       const product = this.inventory.find((p) => {

@@ -12,7 +12,7 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{ product.name }}</h5>
                                     <!-- Product price-->
-                                    ${{ product.price.CAD.toFixed(2) }}
+                                    ${{ product.price.toFixed(2) }}
                                 </div>
                             </div>
                             <!-- Product actions-->

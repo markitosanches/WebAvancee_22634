@@ -9,7 +9,7 @@
                       <h1 class="display-5 fw-bolder">{{ product.name }}</h1>
                       <div class="fs-5 mb-5">
                           <span class="text-decoration-line-through"></span>
-                          <span>$ {{ product.price.CAD.toFixed(2) }} CAD</span>
+                          <span>$ {{ product.price.toFixed(2) }} CAD</span>
                       </div>
                       <p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi quis inventore quas vero, sequi laudantium eveniet amet eum reiciendis nulla iste. Repellendus laboriosam, minus fuga quis corrupti quibusdam cumque placeat.</p>
                       <div class="d-flex">

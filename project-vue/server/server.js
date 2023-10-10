@@ -11,11 +11,8 @@ const db = require('./app/models')
 //Sequelize
 db.connex.sync()
 
-
-//test
-app.get('/', (req, res) => {
-    res.json({message:'Welcome'})
-})
+//route
+require('./app/routes/product.route')(app)
 
 const PORT = 8080
 app.listen(PORT,() => {
