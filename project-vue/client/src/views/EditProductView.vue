@@ -13,7 +13,7 @@
           >
             <div class="col-sm-12">
               <h4 class="mb-3">Add new product</h4>
-              <div v-show="message" class="alert alert-danger">{{message}}</div>
+              <div v-show="message" class="alert alert-success">{{message}}</div>
               <div class="needs-validation" novalidate>
                 <div class="row g-2">
                   <div v-if="!submitted">
@@ -95,7 +95,8 @@
                       Valid photo path is required.
                     </div>
                   </div>
-                  <button class="w-100 btn btn-secondary btn-lg mt-3" type="button" @click="saveProduct">Save </button>
+                  <button class="w-100 btn btn-secondary btn-lg mt-3" type="button" @click="updateProduct">Update </button>
+                  <button class="w-100 btn btn-danger btn-lg mt-3" type="button" @click="deleteProduct">Delete </button>
                   </div>
                   <div v-else>
                     <div  class="alert alert-success alert-dismissible fade show" role="alert">
@@ -118,7 +119,7 @@
 import ProductDataService from '@/services/ProductDataService'
 
 export default {
-  props: ['addInv'],
+  props: ['removeInv', 'inventory', 'remove', 'updateInv'],
   data () {
     return {
       message: null,
@@ -128,21 +129,28 @@ export default {
     }
   },
   methods: {
-    saveProduct () {
-      ProductDataService.create(this.product)
+    updateProduct () {
+      ProductDataService.update(this.id, this.product)
         .then(response => {
-          this.product.id = response.data.id
-          this.addInv(this.product)
-          this.submitted = true
-          this.message = null
-        })
-        .catch(error => {
-          this.message = error.response.data.message
+          this.updateInv(this.productIndex, this.product)
+          this.message = response.data.message
         })
     },
-    newProduct () {
-      this.submitted = false
-      this.product = {}
+    deleteProduct () {
+      ProductDataService.delete(this.id)
+        .then(response => {
+          this.remove(this.product.name)
+          this.removeInv(this.productIndex)
+          this.$router.push({ name: 'home' })
+        })
+    }
+  },
+  computed: {
+    productIndex () {
+      const index = this.inventory.findIndex((p) => {
+        return p.id === this.id
+      })
+      return index
     }
   },
   mounted () {

@@ -45,3 +45,49 @@ exports.findByPk = (req, res) => {
         })
     })
 }
+
+exports.delete = (req, res) => {
+    const id = req.params.id
+    Product.destroy({
+        where: {id:id}
+    })
+    .then(num => {
+        if(num == 1){
+            res.send({
+                message: 'Product was deleted'
+            })
+        }else{
+            res.send({
+                message: 'Could not delete'
+            })
+        }
+    })
+    .catch(e => {
+        res.status(500).send({
+            message: 'Database error'
+        })
+    })
+}
+
+exports.update = (req, res) => {
+    const id = req.params.id
+    Product.update(req.body, {
+        where: {id:id}
+    })
+    .then(num => {
+        if(num == 1){
+            res.send({
+                message: 'Product updated'
+            })
+        }else{
+            res.send({
+                message: 'Could not update'
+            })
+        }
+    })
+    .catch(e => {
+        res.status(500).send({
+            message: 'Database error'
+        })
+    })
+}

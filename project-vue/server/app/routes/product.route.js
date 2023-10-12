@@ -8,6 +8,10 @@ module.exports = app => {
     router.post('/', product.create)
 
     router.get('/:id', product.findByPk)
+    
+    router.delete('/:id', product.delete)
+
+    router.put('/:id', product.update)
 
     app.use('/api/product', router)
 }
