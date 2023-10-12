@@ -123,13 +123,8 @@ export default {
     return {
       message: null,
       submitted: false,
-      product: {
-        name: null,
-        photo: null,
-        price: null,
-        description: null,
-        type: null
-      }
+      product: {},
+      id: parseInt(this.$route.params.id)
     }
   },
   methods: {
@@ -149,6 +144,12 @@ export default {
       this.submitted = false
       this.product = {}
     }
+  },
+  mounted () {
+    ProductDataService.get(this.id)
+      .then(response => {
+        this.product = response.data
+      })
   }
 }
 </script>

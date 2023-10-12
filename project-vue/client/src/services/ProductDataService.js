@@ -7,6 +7,10 @@ class ProductDataService {
   create (data) {
     return http.post('/product', data)
   }
+
+  get (id) {
+    return http.get(`/product/${id}`)
+  }
 }
 
 export default new ProductDataService()

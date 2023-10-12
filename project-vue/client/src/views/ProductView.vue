@@ -19,6 +19,10 @@
                               Add to cart
                           </button>
                       </div>
+                      <hr class="my-4">
+                      <div class="d-flex">
+                        <RouterLink :to="{name: 'edit-product', params: {id: product.id}}" class="btn btn-outline-success mt-10">Edit Product</RouterLink>
+                      </div>
                   </div>
               </div>
           </div>

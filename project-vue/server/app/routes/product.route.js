@@ -7,5 +7,7 @@ module.exports = app => {
 
     router.post('/', product.create)
 
+    router.get('/:id', product.findByPk)
+
     app.use('/api/product', router)
 }
