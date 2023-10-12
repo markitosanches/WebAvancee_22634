@@ -15,7 +15,7 @@
               <h4 class="mb-3">Add new product</h4>
               <div class="needs-validation" novalidate>
                 <div class="row g-2">
-                  <div>
+                  <div v-if="!submitted">
                   <div class="col-12">
                     <label for="productName" class="form-label"
                       >Product Name</label
@@ -24,6 +24,7 @@
                       type="text"
                       class="form-control"
                       id="productName"
+                      v-model="product.name"
                       placeholder=""
                       required
                     />
@@ -37,6 +38,7 @@
                       type="text"
                       class="form-control"
                       id="productPhoto"
+                      v-model="product.photo"
                       placeholder=""
                       required
                     />
@@ -52,6 +54,7 @@
                         type="text"
                         class="form-control"
                         id="productPrice"
+                        v-model.number="product.price"
                         placeholder=""
                         required
                       />
@@ -65,6 +68,7 @@
                     <textarea
                       class="form-control"
                       id="productDescription"
+                      v-model="product.description"
                       placeholder=""
                     ></textarea>
                     <div class="invalid-feedback">Valid description</div>
@@ -76,11 +80,12 @@
                     <select
                       class="form-control"
                       id="productType"
+                      v-model="product.type"
                       placeholder=""
                       required
                     >
                       <option value="">Select</option>
-                      <option value="Burguer">Burguer</option>
+                      <option value="Burger">Burger</option>
                       <option value="Italian">Italian</option>
                       <option value="Indian">Indian</option>
                       <option value="Thai">Thai</option>
@@ -89,9 +94,9 @@
                       Valid photo path is required.
                     </div>
                   </div>
-                  <button class="w-100 btn btn-secondary btn-lg mt-3" type="button" >Save </button>
+                  <button class="w-100 btn btn-secondary btn-lg mt-3" type="button" @click="saveProduct">Save </button>
                   </div>
-                  <div>
+                  <div v-else>
                     <div  class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong> You submitted successfully!</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -107,3 +112,35 @@
       </section>
     </div>
   </template>
+
+<script>
+import ProductDataService from '@/services/ProductDataService'
+
+export default {
+  props: ['addInv'],
+  data () {
+    return {
+      submitted: false,
+      product: {
+        name: null,
+        photo: null,
+        price: null,
+        description: null,
+        type: null
+      }
+    }
+  },
+  methods: {
+    saveProduct () {
+      ProductDataService.create(this.product)
+        .then(response => {
+          this.addInv(this.product)
+          this.submitted = true
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  }
+}
+</script>

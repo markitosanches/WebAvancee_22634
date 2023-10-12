@@ -5,5 +5,7 @@ module.exports = app => {
 
     router.get('/', product.findAll)
 
+    router.post('/', product.create)
+
     app.use('/api/product', router)
 }

@@ -11,6 +11,9 @@ const db = require('./app/models')
 //Sequelize
 db.connex.sync()
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended:true}))
+
 //route
 require('./app/routes/product.route')(app)
 
